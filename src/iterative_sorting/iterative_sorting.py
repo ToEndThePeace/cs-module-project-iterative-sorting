@@ -14,7 +14,7 @@ def selection_sort(arr):
 
 # TO-DO:  implement the Bubble Sort function below
 def bubble_sort(arr):
-    # FIRST PASS - inefficient! 
+    # FIRST PASS - inefficient!
     # bubble sort DOES NOT need to touch last element
     # more than once! each iteration can ignore one more
     # element off the end! REDO
@@ -30,7 +30,6 @@ def bubble_sort(arr):
             if arr[j] > arr[j + 1]:
                 arr[j], arr[j + 1] = arr[j + 1], arr[j]
 
-    
     return arr
 
 
@@ -50,10 +49,25 @@ showed up, we can construct a sorted set of the input data from the
 buckets. 
 
 What is the time and space complexity of the counting sort algorithm?
+
 '''
 
 
-def counting_sort(arr, maximum=None):
+def counting_sort(arr, maximum=9):
     # Your code here
-
-    return arr
+    if len(arr) < 1:
+        return []
+    count_arr = [0] * (maximum + 1)
+    output = [""] * (len(arr) + 1)
+    for i in arr:
+        if i < 0:
+            return "Error, negative numbers not allowed in Count Sort"
+        count_arr[i] += 1
+    for j in range(1, len(count_arr)):
+        count_arr[j] = count_arr[j] + count_arr[j - 1]
+    for value, count in enumerate(count_arr):
+        while count > 0 and output[count] == "":
+            output[count] = value
+            count -= 1
+    output.pop(0)
+    return output
