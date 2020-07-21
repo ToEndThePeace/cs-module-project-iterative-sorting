@@ -18,17 +18,17 @@ def bubble_sort(arr):
     # bubble sort DOES NOT need to touch last element
     # more than once! each iteration can ignore one more
     # element off the end! REDO
-    # swap_count = 1
-    # while swap_count != 0:
-    #     swap_count = 0
-    #     for i in range(len(arr) - 1):
-    #         if arr[i] > arr[i + 1]:
-    #             arr[i], arr[i + 1] = arr[i + 1], arr[i]
-    #             swap_count += 1
-    for i in range(len(arr)):
-        for j in range(len(arr) - i - 1):
-            if arr[j] > arr[j + 1]:
-                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+    swap_count = 1
+    while swap_count != 0:
+        swap_count = 0
+        for i in range(len(arr) - 1):
+            if arr[i] > arr[i + 1]:
+                arr[i], arr[i + 1] = arr[i + 1], arr[i]
+                swap_count += 1
+    # for i in range(len(arr)):
+    #     for j in range(len(arr) - i - 1):
+    #         if arr[j] > arr[j + 1]:
+    #             arr[j], arr[j + 1] = arr[j + 1], arr[j]
 
     return arr
 
@@ -59,15 +59,32 @@ def counting_sort(arr, maximum=9):
         return []
     count_arr = [0] * (maximum + 1)
     output = [""] * (len(arr) + 1)
+    
     for i in arr:
         if i < 0:
             return "Error, negative numbers not allowed in Count Sort"
         count_arr[i] += 1
+    
     for j in range(1, len(count_arr)):
         count_arr[j] = count_arr[j] + count_arr[j - 1]
+    
     for value, count in enumerate(count_arr):
         while count > 0 and output[count] == "":
             output[count] = value
             count -= 1
+
     output.pop(0)
     return output
+
+
+"""
+[9, 6, 3, 7, 2, 8, 9, 2, 0, 0, 7, 1, 2, ,4 ,5 , 6] <---
+max = 9
+newArr = [0] * (max + 1) # [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[0, 0, 0, 0, 0, 0, 0, 0, 1]
+[2, 1, 3, 1, 2, 4, 1, 3, 2, 2] <-----
+
+[2, 3, 6, 7, 9, 13, 14, 17, 19, 21] <---
+
+[0, 0, 0, 1]
+"""
