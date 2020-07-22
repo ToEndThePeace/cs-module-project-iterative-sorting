@@ -58,18 +58,18 @@ def counting_sort(arr, maximum=9):
     if len(arr) < 1:
         return []
     count_arr = [0] * (maximum + 1)
-    output = [""] * (len(arr))
-    
+    output = [None] * (len(arr))
+
     for i in arr:
         if i < 0:
             return "Error, negative numbers not allowed in Count Sort"
         count_arr[i] += 1
-    
+
     for j in range(1, len(count_arr)):
         count_arr[j] = count_arr[j] + count_arr[j - 1]
-    
+
     for value, count in enumerate(count_arr):
-        while count > 0 and output[count - 1] == "":
+        while count > 0 and output[count - 1] == None:
             output[count - 1] = value
             count -= 1
 
