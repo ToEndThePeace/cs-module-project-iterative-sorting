@@ -58,7 +58,7 @@ def counting_sort(arr, maximum=9):
     if len(arr) < 1:
         return []
     count_arr = [0] * (maximum + 1)
-    output = [""] * (len(arr) + 1)
+    output = [""] * (len(arr))
     
     for i in arr:
         if i < 0:
@@ -69,11 +69,10 @@ def counting_sort(arr, maximum=9):
         count_arr[j] = count_arr[j] + count_arr[j - 1]
     
     for value, count in enumerate(count_arr):
-        while count > 0 and output[count] == "":
-            output[count] = value
+        while count > 0 and output[count - 1] == "":
+            output[count - 1] = value
             count -= 1
 
-    output.pop(0)
     return output
 
 
